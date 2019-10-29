@@ -1,0 +1,2 @@
+comments : between { write comment here }
+identifiers : they can start with only letters and may contain numbers.
