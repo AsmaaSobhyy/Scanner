@@ -1,2 +1,2 @@
-comments : between { write comment here }
+comments : between { write comment here } and can not be nested
 identifiers : they can start with only letters and may contain numbers.
