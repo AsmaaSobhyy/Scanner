@@ -1,5 +1,8 @@
 import re
 
+# err = False
+# errSymbol= 'a'
+
 
 class scanner():
 
@@ -38,7 +41,9 @@ class scanner():
                     
                     
                 elif self.is_error(char):
-                  self.set_state('IN_ERROR')
+                    # err=True
+                    # errSymbol=char
+                    self.set_state('DONE')
                 
                 
 
@@ -122,10 +127,21 @@ class scanner():
         elif token in self.Special_Symbols:
             self.tokens.append([token, self.Special_Symbols[token]])
         elif self.is_comment(token):
-            self.tokens.append([token, 'COMMENT'])
+            token=token
+            #self.tokens.append([token, 'COMMENT'])
         elif self.is_error(token):
-            self.tokens.append([token, 'ERROR'])
+            # err=True
+            # errSymbol=token
+            self.tokens.append([token, 'err'])
     
+    # def close(self):
+    #     f=open("tiny.txt", "w+")
+    #     content =f.write("")
+    #     f.close()
+    #     print('inn')
+    #     f=open("output.txt", "w+")
+    #     content =f.write("syntax err")
+    #     f.close()
     
     def is_error(self, token): 
         e_rr = ['@','&','!','"','%','`','.',',','^','$','?' ]
@@ -156,10 +172,21 @@ class scanner():
             return input_text
 
     def output(self):
+        # if(err):
+        #     f=open("output.txt", "w+")
+        #     content =f.write(f"syntax error : undefined symbol {errSymbol}")
+        #     f.close()
+
+        # else:
         with open('output.txt', 'w') as f:
             f.write('{},{}\n'.format('Token value', 'Token Type'))
             for token in self.tokens:
-                f.write('{},{}\n'.format(token[0], token[1]))
+                #print(token)
+                if(token[1] == 'err'):
+                    f.write(f"syntax error : undefined symbol ' {token[0]} ''")
+                    break
+                else:
+                    f.write('{},{}\n'.format(token[0], token[1]))
 
     Reserved_Words = ['else', 'end', 'if', 'repeat', 'then', 'until', 'read', 'write']
 

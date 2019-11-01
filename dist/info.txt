@@ -1,0 +1,6 @@
+tiny language:
+comments : between { write comment here }.
+identifiers : they can start with only letters and may contain numbers.
+Reserved_Words : {else, end, if, repeat, then, until, read, write}.
+Special_Symbols : { + , - , * , : , = , := , ; , ( , ) , > , < , / }.
+      
