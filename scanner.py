@@ -93,7 +93,10 @@ class scanner():
                 self.categorize(token)
                 if self.other_state:
                     token = char
-                    if self.is_error(char): self.set_state('IN_ERROR')
+                    if self.is_error(char): 
+                        self.set_state('START')
+                        self.categorize(char)
+                        token=''
                     if self.is_colon(char): self.set_state('IN_ASSIGN')
                     if self.is_comment(char): self.set_state('IN_COMMENT')
                     if self.is_num(char): self.set_state('IN_NUM')
@@ -124,10 +127,9 @@ class scanner():
             self.tokens.append([token, 'ERROR'])
     
     
-    def is_error(self, token):
-         
-            e_rr=['@','&','!','"','%','`','.',',','^','$','?' ]
-            return True if token in e_rr else False
+    def is_error(self, token): 
+        e_rr = ['@','&','!','"','%','`','.',',','^','$','?' ]
+        return True if token in e_rr else False
         
         
     def is_identifier(self, token):
